@@ -1,0 +1,66 @@
+Fahrplan app - Übungsbeispiel LAP
+
+kunden, Haltestellen, fahrten
+
+kunde: PK_ID, Vorname, Nachname, Anschrift, Telefonnummer
+fahrt: PK_ID, antritt, ende, starthaltestelle, Endhaltestelle, bezahlt, FK_starthaltestelleID, FK_endhaltestelleID
+Tarif: PK_ID, tarifbezeichnung, preis
+Haltestelle: PK_ID, Bezeichnung
+
+1 Kunde -- n Fahrten
+1 Fahrt -- could be 1 Kunde (taxi) or N  Kunden (Zug) - not specified?
+1 Kunde -- 1 Tarif (could be N Tarif, eg seniorentarif und wochenendstarif?)
+1 Tarif -- N Kunden
+1 Haltestelle - N Fahrten
+1 Fahrt -- 2 Haltestellen (wie darstellen?)
+
+bei prüfung würde ich:
+1 Kunde -- N Fahrten
+1 Fahrt -- 1 Kunde
+1 Kunde -- 1 Tarif
+1 Tarif -- N Kunden
+1 Haltestelle -- N Fahrten
+1 Fahrt -- entweder N haltestellen oder haltestelle aufteilen uf start und endhaltestelle?
+
+
+Überlegungen: der Kunde hat mit allen individuellen Daten einen eigenen Tabelleneintrag um bei erneuter Buchung einer neuen Fahrt, Wiederholungen zu vermeiden
+welcher Tarif und welche Haltestellen jeweils dazugehören, steht bei der jeweiligen Fahrt, da sich zB Tarife jederzeit ändern können und dadurch nicht bei Kunden direkt gespeichert werden sollten
+Tarifbezeichnung und Preis gehören immer zusammen, werden dadurch in einer Tabelle gespeichert um bei wiederholtem Verwenden des Tarifs bei unterschiedlichen Fahrten Daten nicht doppelt angeben zu müssen, so bleibt der Preis auch für jeden Kundne/jede Fahrt gleich
+
+Die DB ist in den 3 Normalformen angegeben, da alle Daten aufs kleinste Aufgeteilt sind (1NF), keine nichtschlüsselattribute von anderen nichtschlüssel attributen abhängen (2NF) und auch keine attribute transistiv voneinander abhängen, zB ist eben pro Fahrt 2 ForeignKeys angegeben um einen kombinierten PK zu vermeiden (3NF)
+
+
+------------------------------------------------------------------------------------------------------
+
+überarbeitete ausarbeitung - vollständig & korrekt:
+
+Kunde: PK_kunden_id, Vorname, Nachname, Anschrift, Telefonnummer
+
+Fahrt: PK_fahrt_id, Fahrtantritt, Fahrtende,bezahlt, FK_kunden_id, FK_starthaltestelle_id, FK_endhaltestelle_id, FK_tarif_id
+
+Haltestelle: PK_haltestelle_id, Bezeichnung
+
+Tarif: PK_tarif_id, Tarifbezeichnung, Tarifpreis
+
+1 Kunde -- N Fahrten
+1 Fahrt -- 1 Kunde
+
+1 Tarif -- N Fahrten
+1 Fahrt -- 1 Tarif
+
+1 Haltestelle -- N Fahrten
+1 Fahrt -- 1 Haltestelle (Start und Ende eigene Entitys) --> 1 Starthaltestelle 1 Endhaltestelle
+
+Fahrt -- 2 FKs für je Starthaltestelle & Endhaltestelle
+
+Überprüfung KI: 
+
+Die Datenbank ist in den 3 Normalformen angegeben, da alle Daten atomar gespeichert sind, also jedes Attribut nur einen einzelnen Wert enthält (1NF).
+
+Die 2NF ist erfüllt, weil alle Nicht-Schlüsselattribute vom ganzen Primärschlüssel abhängen. In meinem Beispiel haben die Tabellen einfache Primärschlüssel, z. B. kunden_id, fahrt_id, haltestelle_id und tarif_id. Dadurch hängen die jeweiligen Attribute vollständig vom jeweiligen Primärschlüssel ab. Zum Beispiel hängen Vorname, Nachname, Anschrift und Telefonnummer nur von der kunden_id ab. Fahrtantritt, Fahrtende und bezahlt hängen nur von der fahrt_id ab.
+
+Die 3NF ist erfüllt, weil keine Nicht-Schlüsselattribute voneinander abhängig sind. Zum Beispiel werden Tarifbezeichnung und Tarifpreis in einer eigenen Tabelle Tarif gespeichert. In der Tabelle Fahrt wird nur die FK_tarif_id gespeichert. Dadurch werden Tarifdaten nicht mehrfach bei jeder Fahrt eingetragen. Auch die Haltestellenbezeichnung wird nicht direkt in der Fahrt gespeichert, sondern über FK_starthaltestelle_id und FK_endhaltestelle_id mit der Tabelle Haltestelle verbunden.
+
+Anmerkung:
+Aber bei „Tarife können sich jederzeit ändern“ gibt es einen kleinen Prüfungs-Hinweis:
+Wenn sich der Tarifpreis später ändert, würden alte Fahrten automatisch den neuen Preis anzeigen, wenn nur FK_tarif_id gespeichert ist. Für eine einfache LAP-Aufgabe ist deine Lösung trotzdem okay. Noch genauer wäre: Man könnte bei echten Systemen zusätzlich den tatsächlich bezahlten Preis bei der Fahrt speichern, damit alte Fahrten historisch korrekt bleiben.
