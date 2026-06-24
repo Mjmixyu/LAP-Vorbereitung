@@ -1,0 +1,63 @@
+Übung DB-Analyse - Ausarbeitung/Gedanken/Notes
+
+° 5 Personen anzeigen & sortieren
+	° SELECT lastName, firstName, jobTitle FROM employees ORDER BY lastName DESC LIMIT 5;
+	° ORDER BY (sortieren)
+° Berufsbezeichnung Sales Rep & OfficeCode 1 auswählen
+	° SELECT firstName, lastName, jobTitle, officeCode FROM employees WHERE jobTitle = 'Sales Rep' AND officeCode = 1;
+	° WHERE (Felder wo nächste Abfrage zutrifft')
+	° AND (mehrere Anfragen müssen in dem Fall zutreffen)
+° Alle Nachnamen, keine Doppelten, absteigend sortiert
+	° SELECT DISTINCT lastName FROM employees ORDER BY lastName DESC;
+	° DISTINCT (only unique values, no doubles)
+	° DESC (descending, absteigend sortiert)
+° USA & Frankreich
+	° SELECT * FROM offices WHERE country IN ('USA', 'France');
+	° WHERE xy IN (Wert country muss aus einem der angegebenen Werte nach IN sein)
+° !(nicht) Zwischen 20&100 Dollar
+	° SELECT productCode, productName, buyPrice FROM products WHERE buyPrice NOT BETWEEN 20 AND 100;
+	° Ver-neinung mit NOT
+	° BETWEEN (nur Werte zwischen 2 anderen angegebenen Werten)
+° Buchstabe B ausblenden
+	° SELECT lastName, firstName FROM employees WHERE lastName NOT LIKE 'B%';
+	° NOT LIKE (alle Werte die dem nächsten Wert gleichsind, sind ausgenommen aus der Selection)
+	° 'B%' - Buchstabe B
+° Verkaufsvertreter zugewiesen
+	° SELECT customerName, country, salesRepEmployeeNumber FROM customers WHERE salesRepEmployeeNumber IS NOT NULL;
+	° WHERE xy IS NOT NULL (nur wo der gesuchte Wert nicht Null/leer ist, also zugewiesen ist
+° Bestelldaten gruppieren
+	° SELECT o.orderNumber, o.status, SUM(od.quantityOrdered * od.priceEach) AS total FROM orders o JOIN orderdetails od ON o.orderNumber = od.orderNumber GROUP BY 	o.orderNumber;
+	° SUM (summe einer Rechnung innerhalb der klammer) AS (also eine neue Variable)
+	° JOIN ON (wo orderdetails von orderdetails-tabelle und orderdetails von order.tabelle gleiche orderNumber haben)
+	° GROUP BY (gruppiert nach orderNumber)
+° Angestellte ohne zugewiesene Kunden
+	° SELECT e.lastName FROM employees e LEFT JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber WHERE c.salesRepEmployeeNumber IS NULL ORDER BY e.lastName;
+	° LEFT JOIN nimmt alle Angestellten aus der linken Tabelle employees, auch wenn es keinen passenden Kunden in der Tabelle customers gibt
+	° ON e.employeeNumber = c.salesRepEmployeeNumber vergleicht die Mitarbeiternummer aus employees mit der Verkaufsvertreter-Nummer aus customers
+	° WHERE c.salesRepEmployeeNumber IS NULL filtert nur die Angestellten heraus, bei denen kein passender Kunde gefunden wurde
+	° ORDER BY e.lastName sortiert das Ergebnis nach Nachnamen
+° Bestellungen unter 1500$ Gesamtsumme
+	° SELECT o.orderNumber, o.status, SUM(od.quantityOrdered * od.priceEach) AS total FROM orders o JOIN orderdetails od ON o.orderNumber = od.orderNumber WHERE o.status = 	'Shipped' GROUP BY o.orderNumber HAVING total > 1500;
+	SELECT FROM orders um Bestelldaten zu bekommen/auszugeben
+	° JOIN orderdetails ON order.ordernumber = orderDetail.ordernumber - die Tabellenwerte/Spalten werden verbunden sobald diese angegebenen Werte gleich sind
+	° WHERE status = 'Shipped' - genau so muss es in der Tabelle stehen
+	° HAVING (nimmt Daten wo das total(variable aus summe) > größer als 1500 ist
+° SubSelect – Kunde mit dem meisten Umsatz
+	° SELECT c.customerName, p.checkNumber, (SELECT SUM(p2.amount) FROM payments p2 WHERE p2.customerNumber = c.customerNumber) AS gesamtUmsatz FROM customers c JOIN payments 	p ON c.customerNumber = p.customerNumber ORDER BY gesamtUmsatz DESC LIMIT 1;
+	° `FROM customers c JOIN payments p ON c.customerNumber = p.customerNumber` verbindet die Kunden-Tabelle mit der Zahlungs-Tabelle, dort wo die Kundennummer gleich ist
+	° `(SELECT SUM(p2.amount) FROM payments p2 WHERE p2.customerNumber = c.customerNumber)` ist der SubSelect. Er berechnet die Summe aller Zahlungen für den jeweiligen Kunden
+	° `LIMIT 1` zeigt nur den ersten Datensatz an, also den Kunden mit dem höchsten Umsatz
+° Kunden ohne Bestellung
+	° SELECT customerName FROM customers WHERE customerNumber NOT IN (SELECT customerNumber FROM orders);
+	° NOT IN (SELECT ... FROM ...) nur Kunden aus Kundentabelle wo die Kundennummer NICHT in Order-Tabelle ist
+° UNION Operator – Kunden und Angestellte 1 Tabelle
+	° SELECT CONCAT(firstName, ' ', lastName) AS name, 'Customer' AS type FROM customers UNION SELECT CONCAT(firstName, ' ', lastName) AS name, 'Employee' AS type FROM 	employees;
+	° CONCAT - vereint 2 Werte zu einem Wert
+	° UNION vereint das Ergebnis mit dem nächsten Ergebnis der nächsten Abfrage (neue Tabelle mit name (concat wert) für beides, Kunden und Employees)
+° Maildomains aktualisieren – replace
+	° zurzeit „@mynextmail.org“ gesetzt haben auf „@lbs4.salzburg.at“ zu setzen
+	° Wichtig: Dafür musste man die Safe-Updates disablen, mit einem einfachen Befehl:
+		° SET SQL_SAFE_UPDATES = 0;
+	° UPDATE employees SET email = REPLACE(email, '@mynextmail.org', '@lbs4.salzburg.at') WHERE jobTitle = 'Sales Rep' AND officeCode = 6;
+	° UPDATE alte werte einer Tabelle umändern ohne sie zu löschen
+	° SET xywertxy = REPLACE (Spalte, 'alterWert', 'neuerWert')
