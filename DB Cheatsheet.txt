@@ -1,0 +1,287 @@
+1. Datenbank erstellen / auswählen / löschen
+
+	° CREATE DATABASE datenbankname;
+	° CREATE DATABASE IF NOT EXISTS datenbankname;
+	° USE datenbankname;
+	° DROP DATABASE datenbankname;
+	° DROP DATABASE IF EXISTS datenbankname;
+
+-------------------------------------------------------------
+2. Tabelle erstellen
+
+CREATE TABLE tabellenname (
+    id INT NOT NULL AUTO_INCREMENT,
+    spalte1 DATENTYP,
+    spalte2 DATENTYP,
+    PRIMARY KEY (id)
+);
+
+Mit Fremdschlüssel:
+
+CREATE TABLE tabellenname (
+    id INT NOT NULL AUTO_INCREMENT,
+    fremd_id INT,
+    spalte1 DATENTYP,
+    PRIMARY KEY (id),
+    FOREIGN KEY (fremd_id) REFERENCES andere_tabelle(andere_id)
+);
+
+-------------------------------------------------------------
+3. Tabelle löschen / leeren
+
+Tabelle komplett löschen:
+	° DROP TABLE tabellenname;
+
+Nur alle Daten löschen, Tabelle bleibt:
+	° DELETE FROM tabellenname;
+
+Alle Daten löschen und Auto-Increment zurücksetzen:
+	° TRUNCATE TABLE tabellenname;
+
+	Oder
+
+	° DELETE FROM tabellenname;
+	ALTER TABLE tabellenname AUTO_INCREMENT = 1;
+
+-------------------------------------------------------------
+4. Tabelle verändern
+
+Spalte hinzufügen:
+	° ALTER TABLE tabellenname
+	ADD spaltenname DATENTYP;
+
+Spalte löschen:
+	° ALTER TABLE tabellenname
+	DROP COLUMN spaltenname;
+
+Spalte ändern:
+	° ALTER TABLE tabellenname
+	MODIFY spaltenname NEUER_DATENTYP;
+
+Spalte umbenennen:
+	° ALTER TABLE tabellenname
+	CHANGE alter_spaltenname neuer_spaltenname DATENTYP;
+
+Tabelle umbenennen:
+	° RENAME TABLE alter_tabellenname TO neuer_tabellenname;
+
+-------------------------------------------------------------
+5. Primary Key / Foreign Key / Unique / Index
+
+Primary Key hinzufügen:
+	° ALTER TABLE tabellenname
+	ADD PRIMARY KEY (spaltenname);
+
+Foreign Key hinzufügen:
+	° ALTER TABLE tabellenname
+	ADD CONSTRAINT fk_name
+	FOREIGN KEY (fremd_id)
+	REFERENCES andere_tabelle(andere_id);
+
+Foreign Key löschen:
+	° ALTER TABLE tabellenname
+	DROP FOREIGN KEY fk_name;
+
+Unique hinzufügen:
+	° ALTER TABLE tabellenname
+	ADD UNIQUE (spaltenname);
+
+Index erstellen:
+	° CREATE INDEX indexname
+	ON tabellenname(spaltenname);
+
+Unique Index erstellen:
+	° CREATE UNIQUE INDEX indexname
+	ON tabellenname(spaltenname);
+
+Index löschen:
+	° ALTER TABLE tabellenname
+	DROP INDEX indexname;
+
+-------------------------------------------------------------
+6. Daten einfügen
+
+Ein Datensatz:
+	° INSERT INTO tabellenname (spalte1, spalte2, spalte3)
+	VALUES (wert1, wert2, wert3);
+
+Mehrere Datensätze:
+	° INSERT INTO tabellenname (spalte1, spalte2)
+	VALUES 
+	(wert1, wert2),
+	(wert1, wert2),
+	(wert1, wert2);
+
+Alle Spalten befüllen:
+	° INSERT INTO tabellenname
+	VALUES (wert1, wert2, wert3);
+
+Besser ist aber meistens die Variante mit Spaltennamen.
+
+-------------------------------------------------------------
+7. Daten anzeigen / abfragen
+
+Alle Daten anzeigen:
+	° SELECT * FROM tabellenname;
+
+Bestimmte Spalten anzeigen:
+	° SELECT spalte1, spalte2
+	FROM tabellenname;
+
+Mit Bedingung:
+	° SELECT *
+	FROM tabellenname
+	WHERE bedingung;
+
+Sortieren:
+	° SELECT *
+	FROM tabellenname
+	ORDER BY spalte ASC;
+
+	° SELECT *
+	FROM tabellenname
+	ORDER BY spalte DESC;
+
+Begrenzen:
+	° SELECT *
+	FROM tabellenname
+	LIMIT anzahl;
+
+-------------------------------------------------------------
+8. Daten ändern / editieren
+
+Einen Wert ändern:
+	° UPDATE tabellenname
+	SET spalte = neuer_wert
+	WHERE bedingung;
+
+Mehrere Spalten ändern:
+	° UPDATE tabellenname
+	SET spalte1 = neuer_wert1, spalte2 = neuer_wert2
+	WHERE bedingung;
+
+Wert ersetzen:
+	° UPDATE tabellenname
+	SET spalte = REPLACE(spalte, alter_wert, neuer_wert)
+	WHERE bedingung;
+
+Wichtig: Ohne WHERE werden alle Zeilen geändert.
+
+-------------------------------------------------------------
+9. Daten löschen
+
+Bestimmte Datensätze löschen:
+	° DELETE FROM tabellenname
+	WHERE bedingung;
+
+Alle Datensätze löschen:
+	° DELETE FROM tabellenname;
+
+Wichtig: Ohne WHERE wird alles gelöscht.
+
+-------------------------------------------------------------
+10. Joins
+
+Inner Join:
+	° SELECT spalten
+	FROM tabelleA
+	INNER JOIN tabelleB
+	ON tabelleA.id = tabelleB.fk_id;
+
+Left Join:
+	° SELECT spalten
+	FROM tabelleA
+	LEFT JOIN tabelleB
+	ON tabelleA.id = tabelleB.fk_id;
+
+Right Join:
+	° SELECT spalten
+	FROM tabelleA
+	RIGHT JOIN tabelleB
+	ON tabelleA.id = tabelleB.fk_id;
+
+Full Outer Join in MySQL/MariaDB-Ersatz:
+	° SELECT spalten
+	FROM tabelleA
+	LEFT JOIN tabelleB
+	ON tabelleA.id = tabelleB.fk_id
+
+	UNION
+
+	SELECT spalten
+	FROM tabelleA
+	RIGHT JOIN tabelleB
+	ON tabelleA.id = tabelleB.fk_id;
+
+-------------------------------------------------------------
+11. Gruppieren / Berechnen
+
+Anzahl zählen:
+	° SELECT COUNT(*)
+	FROM tabellenname;
+
+Summe berechnen:
+	° SELECT SUM(spalte)
+	FROM tabellenname;
+
+Durchschnitt:
+	° SELECT AVG(spalte)
+	FROM tabellenname;
+
+Minimum:
+	° SELECT MIN(spalte)
+	FROM tabellenname;
+
+Maximum:
+	° SELECT MAX(spalte)
+	FROM tabellenname;
+
+Gruppieren:
+	° SELECT spalte, COUNT(*)
+	FROM tabellenname
+	GROUP BY spalte;
+
+Gruppieren mit Bedingung nach der Gruppierung:
+	° SELECT spalte, COUNT(*)
+	FROM tabellenname
+	GROUP BY spalte
+	HAVING COUNT(*) > wert;
+
+-------------------------------------------------------------
+12. Nützliche Verwaltungsbefehle
+
+Alle Datenbanken anzeigen:
+	° SHOW DATABASES;
+
+Alle Tabellen anzeigen:
+	° SHOW TABLES;
+
+Tabellenstruktur anzeigen:
+	° DESCRIBE tabellenname;
+
+	Oder:
+
+	° SHOW COLUMNS FROM tabellenname;
+
+CREATE-Befehl einer Tabelle anzeigen:
+	° SHOW CREATE TABLE tabellenname;
+
+Alle Indexe anzeigen:
+	° SHOW INDEX FROM tabellenname;
+
+-------------------------------------------------------------
+13. Safe Updates
+
+Safe Updates ausschalten:
+	° SET SQL_SAFE_UPDATES = 0;
+
+Safe Updates einschalten:
+	° SET SQL_SAFE_UPDATES = 1;
+
+Braucht man manchmal bei UPDATE oder DELETE, wenn MySQL Workbench blockiert.
+
+-------------------------------------------------------------
+Wichtig bei Foreign Keys:
+
+Zuerst Eltern-Tabelle befüllen.
+Dann Kind-Tabelle befüllen.
