@@ -1,0 +1,41 @@
+VS-Code Shortcuts:
+° alt + shift + o --> remove unused imports
+° alt + z --> no lines longer than screen
+° ctrl + shift + f --> format code
+° ctrl + p --> search document in project by name
+° ctrl + shift + p --> change setting or find command
+° ctrl + / --> comment current line or selected
+° ctrl + shift + f --> search inside all files
+° ctrl + shift + o --> jump to source/symbol in window
+° ctrl + shift + t --> jump to symbol anywhere
+
+------------------------------------------------------------------------------
+PHP need to know:
+° create project in xampp-htdocs folder!
+° start server to run:
+	° cd into project (PS C:\xampp\htdocs\php example patientenverwaltung>) 
+	° php -S localhost:8000
+° then simply open:
+	° http://localhost:8000/index.php
+
+------------------------------------------------------------------------------
+basic commands good no know: (extended in W3Schools)
+° <?php ?> --> insert a php script in a file
+° echo --> print text
+° keywords are not case-sensitive
+° not all variables are - e.g. $color != $COLOR
+° regular commenting style --> // or #  or /**/ --> ctrl + # 
+° variables start with $
+° $name_name --> created variables r case-sensitive
+° text with variable --> echo 'writing' . $text;
+° datatypes are set with the value, not via keyword
+° $x = "John";
+  echo "Hello $x";
+	Hello John
+° $x = "John";
+  echo 'Hello $x';
+	Hello $x
+------------------------------------------------------------------------------
+W3Schools links:
+https://www.w3schools.com/php/php_mysql_intro.asp
+https://www.w3schools.com/php/default.asp
