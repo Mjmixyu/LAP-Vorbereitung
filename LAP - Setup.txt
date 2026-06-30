@@ -1,0 +1,23 @@
+LAP - Setup:
+
+° Install VSCode
+	° Plugins:
+		° Bootstrap 5 Quick Snippets
+		° HTML CSS Support
+		° MySQL
+		° (PHP)
+		° PHP Intelphense
+		° (Database Client JDBC)
+		° Palenight Theme
+
+° Install Xampp
+	° https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download
+	° set php folder as environment variable
+	° start MySQL and Apache
+
+° Install MySQL Workbench
+
+° create Project folder in: xampp/htdocs
+
+° start xampp server (php -S localhost:8000)
+° "run" project with (http://localhost:8000/index.php --> index.pp is the main start file, if called different, command is different)
