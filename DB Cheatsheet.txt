@@ -290,3 +290,5 @@ Dann Kind-Tabelle befüllen.
 Wichtig:
 
 ° ! FK Namen dürfen bei "Wiederholung" nicht gleich heißen - bei mehrfacher Verwendung FK_idSomething (in Tabell1 und Tabelle2) müssen beide unterschiedlich benannt werden (einer davon zB FK_idSomethingForTable2)
+° ! AUTO_INCREMENT bei künstlichen IDs wie idKunde, idFahrt, idAdresse
+° ! Kein AUTO_INCREMENT bei echten fachlichen Werten wie PLZ oder bei zusammengesetzten Primärschlüsseln
