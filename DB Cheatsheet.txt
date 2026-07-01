@@ -285,3 +285,8 @@ Wichtig bei Foreign Keys:
 
 Zuerst Eltern-Tabelle befüllen.
 Dann Kind-Tabelle befüllen.
+
+-------------------------------------------------------------
+Wichtig:
+
+° ! FK Namen dürfen bei "Wiederholung" nicht gleich heißen - bei mehrfacher Verwendung FK_idSomething (in Tabell1 und Tabelle2) müssen beide unterschiedlich benannt werden (einer davon zB FK_idSomethingForTable2)
