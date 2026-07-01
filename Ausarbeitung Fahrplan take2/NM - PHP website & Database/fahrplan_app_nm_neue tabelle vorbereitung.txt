@@ -1,0 +1,28 @@
+Kunden - PK_idKunde(int, notnull), Vorname(varchar45), Nachname(varchar45), email(varchar45, unique, nn)
+Fahrt - PK_idFahrt, fahrtbezahlt(bool), Startzeit(dateTime), endzeit(dateTime), FK_idKunde(int, nn), FK_idStarthaltestelle, FK_idEndhaltestelle, FK_idTarif (FK - int)
+Haltestelle - PK_idHaltestelle(int), Bezeichnung(varchar45), FK_idAdresse(int)
+Tarif - PK_idTsarif(int), bezeichnung(varchar45), preis(decimal 10,2)
+Adresse - PK_idAdresse(int, nn), Strasse(varchar45), Hausnummer(varchar10), FK_PLZ(int, nn), FK_idKunde(int)
+Ort - PK_PLZ(int, nn), Ortsname(varchar45)
+
+neu:
+Sitzplatzreservierung: PK_idReservierung(int, nn, ai), platznummer(varchar10), FK_idFahrt(int, nn) - UNIQUE (FK_idFahrt, platznummer)
+	unique -- vermeidet in dem fall, dass ein sitzplatz 2x bei der gleichen fahrt vergeben wird
+
+1 Kunde -- N Sitzplatzreservierungen
+1Sitzplatzreservierung -- 1 Kunde
+
+1 Fahrt -- N Sitzplatzreservierungen
+1 Sitzplatzreservierung -- 1 Fahrt
+
+um das unique zu erstellen - bei tabelle sitzplatzreservierung auf "indexes" gehen (neben "foreign keys")
+			   - neuer index bsp UQ_fahrt_platz
+			   - type auf 	unique setzen
+			   - column platznummer und FK_idFahrt auswählen
+
+--------------------------------------------
+Fehler:
+
+Sitzplatzreservierung sollte einen FK zu fahrt haben (nicht fahrt zu Sitzplatzreservierung)
+da so mehrere sitzplätze pro fahrt reserviert werden können (anders jeweils nur 1er)
+hätte aus unique vergessen!

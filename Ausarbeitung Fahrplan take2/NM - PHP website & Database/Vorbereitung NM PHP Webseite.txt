@@ -1,0 +1,40 @@
+Vorbereitung NM PHP Webseite
+
+gefordert:
+° Startseite
+° navigation
+° Seite zum Einfügen von Daten (insert)
+° Seite zum Abfragen der Daten (search)
+° prepared statements
+° Kommentare nicht vergessen
+° Dokumentation wieso was und wie benutzt
+
+aufbau:
+index.php als Startseite
+header.php enthält Metadaten wie styling(bootstrap) und benötigte (wenn) javascripts
+footer.php als Impressum
+nav.php als navigation
+database.php zur datenbankverbindung
+search.php zum Abfragen der Daten
+insert.php zum Einfügen der Daten
+
+welche tools:
+° xampp
+ ° Apache
+ ° mysql
+
+° vscode
+ ° bootstrap 5 quick snippets
+ ° html css support
+ ° mysql
+ ° php intelphense
+ ° (php/phpdebug)
+ ° palenight theme (wichtig sonst schaut die IDE scheisse aus)
+
+° mysql worbench
+
+wieso:
+° xampp-mysql: bereits Erfahrung, leichte umstzung für diese aufgabe
+	° Apache → führt PHP aus und liefert die Webseite im Browser aus
+	° MySQL → speichert und liefert die Datenbankdaten
+° vscode: bereitgestellte plugins, easy setup

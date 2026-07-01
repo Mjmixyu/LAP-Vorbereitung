@@ -1,0 +1,58 @@
+Fahrplan-App Vorbereitung:
+
+Kunden - PK_idKunde(int, notnull), Vorname(varchar45), Nachname(varchar45), email(varchar45, unique, nn)
+Fahrt - PK_idFahrt, fahrtbezahlt(bool), Startzeit(dateTime), endzeit(dateTime), FK_idKunde(int, nn), FK_idStarthaltestelle, FK_idEndhaltestelle, FK_idTarif (FK - int)
+Haltestelle - PK_idHaltestelle(int), Bezeichnung(varchar45), FK_idAdresse(int)
+Tarif - PK_idTsarif(int), bezeichnung(varchar45), preis(decimal 10,2)
+Adresse - PK_idAdresse(int, nn), Strasse(varchar45), Hausnummer(varchar10), FK_PLZ(int, nn), FK_idKunde(int)
+Ort - PK_PLZ(int, nn), Ortsname(varchar45)
+
+1 Kunde -- N Adressen
+1 Adresse -- 1 Kunden
+
+1 Ort -- N Adressen
+1 Adresse -- 1 Ort
+
+1 Fahrt -- 1 Kunde
+1 Kunde -- N Fahrten
+
+1 Fahrt -- 1 Start-Haltestelle
+1 Fahrt -- 1 End-Haltestelle
+1 Haltestelle -- N Fahrten
+
+1 Fahrt -- 1 Tarif
+1 Tarif -- N Fahrten
+
+1 Haltestelle -- 1 Adresse
+1 Adresse -- 1 Haltestelle
+
+1 Kunde -- N Haltestellen
+1 Haltestelle -- N Kunden --> N:M
+--> Kunde_Haltestelle: PK_idKundeHaltestelle, FK_idKunde, FK_idHaltestelle
+	PK_idKundeHaltestelle(FK_idKunde, FK_idHaltestelle)
+
+1NF -- ja -- keine werte nicht atomar (bsp Strasse und Hausnummer getrennt)
+2NF -- ja -- keine nicht-schlüssel attribute hängen nicht vollständig von einem PK ab (bsp vorname, nachname,... hängen nur von idKunde ab)
+3NF -- ja -- keine transistiven abhängigkeiten, keine nicht-schlüssel attribute hängen voneinander ab (bsp ort und plz in eigener Tabelle ort)
+
+Fill Order Tables:
+° Kunde
+° Tarif
+° Ort
+° Adresse
+° Haltestelle
+° Fahrt
+
+------------------------------------
+
+Fehler: 
+° Kunde darf nicht FK_idAdresse haben
+° Adresse bekommt FK_idKunde
+° Hausnummer varchar statt int
+° forgot 10,2 with decimal
+° Beziehungen Ort vergessen
+° Beziehungen N:M Kunde Haltestelle übersehen
+
+° ! FK Namen dürfen bei "Wiederholung" nicht gleich heißen - bei mehrfacher Verwendung FK_idKunde (in Adresse und Fahrt) müssen beide unterschiedlich benannt werden (einer davon zB FK_idKundeFuerFahrt)
+° ! AUTO_INCREMENT bei künstlichen IDs wie idKunde, idFahrt, idAdresse
+  ! Kein AUTO_INCREMENT bei echten fachlichen Werten wie PLZ oder bei zusammengesetzten Primärschlüsseln
