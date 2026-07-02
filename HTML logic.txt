@@ -1,0 +1,148 @@
+HTML logic:
+-------------------------------------------
+
+<!DOCTYPE html> --> sagt dem Browser, dass es eine HTML5-Seite ist
+
+<html lang="de"> --> startet das HTML-Dokument und legt die Sprache der Webseite fest
+
+<head> --> enthält Metadaten der Webseite, die meistens nicht direkt sichtbar sind
+
+<meta charset="utf-8"> --> legt den Zeichensatz fest, damit Umlaute richtig angezeigt werden
+
+<meta name="viewport" content="width=device-width, initial-scale=1"> --> wichtig für responsives Design auf Handy, Tablet und Desktop
+
+<title>Seitentitel</title> --> Titel der Webseite, wird im Browser-Tab angezeigt
+
+<link href="..." rel="stylesheet"> --> bindet eine CSS-Datei ein, z. B. Bootstrap oder style.css
+
+<script src="..."></script> --> bindet eine JavaScript-Datei ein, z. B. Bootstrap-JavaScript
+
+<body> --> sichtbarer Inhalt der Webseite beginnt hier
+
+<body class="..."> --> dem body werden CSS-/Bootstrap-Klassen gegeben, z. B. für Layout oder Sticky Footer
+
+<header> --> oberer Bereich der Webseite, z. B. Logo oder Titel
+
+<nav> --> Navigationsbereich der Webseite
+
+<a href="seite.php">Text</a> --> Link zu einer anderen Seite
+
+<main> --> Hauptinhalt der Webseite
+
+<section> --> eigener Inhaltsbereich innerhalb der Seite
+
+<article> --> eigenständiger Inhaltsblock, z. B. Willkommensbereich
+
+<footer> --> unterer Bereich der Webseite, z. B. Impressum oder Copyright
+
+<h1>Überschrift</h1> --> wichtigste Überschrift der Seite
+
+<h2>Überschrift</h2> --> kleinere Unterüberschrift
+
+<p>Text</p> --> normaler Textabsatz
+
+<br> --> Zeilenumbruch
+
+<div> --> allgemeiner Container/Bereich zum Gruppieren von Elementen
+
+<div class="container"> --> Bootstrap-Container, sorgt für sauberen Abstand links/rechts
+
+<div class="row"> --> Bootstrap-Zeile für Spaltenlayout
+
+<div class="col-md-6"> --> Bootstrap-Spalte, nimmt auf mittleren Geräten 6 von 12 Spalten ein
+
+class="..." --> weist einem HTML-Element CSS-/Bootstrap-Klassen zu
+
+id="..." --> eindeutiger Name für ein Element, z. B. für label/form oder JavaScript
+
+<form method="post" action=""> --> Formular, sendet Daten per POST an dieselbe Seite
+
+<form method="get" action=""> --> Formular, sendet Daten per GET, z. B. für Suchabfragen
+
+action="" --> Formular wird an dieselbe Seite geschickt
+
+method="post" --> Daten werden versteckt im Request gesendet, gut für INSERT/UPDATE/DELETE
+
+method="get" --> Daten werden sichtbar in der URL gesendet, gut für Suche/Filter
+
+<label for="feldname">Text</label> --> Beschriftung für ein Eingabefeld
+
+<input type="text" name="feldname"> --> normales Texteingabefeld
+
+<input type="email" name="email"> --> Eingabefeld für E-Mail-Adressen
+
+<input type="number" name="zahl"> --> Eingabefeld für Zahlen
+
+<input type="datetime-local" name="zeit"> --> Eingabefeld für Datum und Uhrzeit
+
+name="..." --> wichtig für PHP, damit der Wert mit $_POST oder $_GET ausgelesen werden kann
+
+required --> Feld muss ausgefüllt werden, bevor das Formular abgeschickt werden kann
+
+placeholder="Text" --> grauer Beispieltext im Eingabefeld
+
+value="..." --> Wert, der beim Abschicken übertragen wird
+
+<select name="variable"> --> Dropdown-Auswahl
+
+<option value="">Bitte wählen</option> --> Auswahlmöglichkeit im Dropdown
+
+<option value="1">Text</option> --> angezeigter Text ist „Text“, gesendeter Wert ist „1“
+
+<button type="submit">Absenden</button> --> Button zum Abschicken eines Formulars
+
+<button type="button">Button</button> --> normaler Button ohne automatisches Absenden
+
+<table> --> Tabelle erstellen
+
+<thead> --> Kopfbereich der Tabelle
+
+<tbody> --> Inhaltsbereich der Tabelle
+
+<tr> --> Tabellenzeile
+
+<th> --> Tabellenüberschrift
+
+<td> --> Tabellenzelle
+
+<img src="bild.png" alt="Beschreibung"> --> Bild einfügen
+
+src="..." --> Quelle einer Datei, z. B. Bild oder JavaScript
+
+href="..." --> Ziel eines Links oder CSS-Datei
+
+alt="..." --> Alternativtext für Bilder, falls Bild nicht geladen wird
+
+class="form-control" --> Bootstrap-Klasse für schöne Eingabefelder
+
+class="form-select" --> Bootstrap-Klasse für schöne Dropdowns
+
+class="btn btn-primary" --> Bootstrap-Klasse für blauen Button
+
+class="alert alert-success" --> Bootstrap-Erfolgsmeldung
+
+class="alert alert-danger" --> Bootstrap-Fehlermeldung
+
+class="card" --> Bootstrap-Karte/Box für schöneres Layout
+
+class="card-body" --> Inhaltsbereich einer Bootstrap-Karte
+
+class="mt-4" --> Bootstrap-Abstand nach oben
+
+class="mb-3" --> Bootstrap-Abstand nach unten
+
+class="p-3" --> Bootstrap-Innenabstand
+
+class="text-center" --> Text zentrieren
+
+class="bg-light" --> heller Hintergrund
+
+class="shadow-sm" --> leichter Schatten
+
+class="d-flex flex-column min-vh-100" --> Layout für Sticky Footer vorbereiten
+
+class="flex-grow-1" --> main nimmt freien Platz ein
+
+class="mt-auto" --> Footer wird nach unten geschoben
+
+<!-- Kommentar --> --> Kommentar in HTML, wird im Browser nicht sichtbar angezeigt

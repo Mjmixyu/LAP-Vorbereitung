@@ -1,0 +1,40 @@
+PHP statements & logic:
+-------------------------------------------
+
+$variablename = ""; --> definition variable leer gesetzt
+
+if ($_SERVER['REQUEST_METHOD'] === '') {} --> POST zum einfügen, GET zum abrufen, prüft ob ein formular geschickt wurde
+
+$variable = $_POST['variable'] ?? '' --> wert auf formular-feld holen, wenn nicht vorhanden leer speichern
+
+$variable = intval($_GET['variable']); --> wert holen und als int speichern
+
+$conn->beginTransaction(); --> transaktion starten, alle folgenden SQL-befehle gehören dann zusammen
+
+$stmtvariable = $conn->prepare("SQL statement"); --> prepared statement vorbereiten, noch nicht ausgeführt, sicher vor SQL injection
+
+stmtvariable->execute(['variable' => $variable]); --> prepared statement ausführen, Platzhalter :variable im SQL bekommt wert aus $variable
+
+$conn->commit(); --> Änderungen speichern, alles seit beginTransaction() wird übernommen
+
+$conn->Rollback(); --> bei fehler, Änderungen rückgängig machen
+
+§stmt = $conn->query("SQL select statement"); --> direkte SQL abfrage ausführen, gültig für SELECTs ohne benutzereingabe
+
+$variable = §stmt->fetchAll(PDO::FETCH_ASSOC); --> alle Ergebnisse der abfrage holen, PPDO::FETCH_ASSOC sorg dass Ergebnisse als array mit spaltennamen gespeichert werden
+
+if(!empty($_GET['variable'])) --> wenn die variable aus dem form field nicht leer ist, also ausgefüllt wurde
+
+echo --> ausgaben (könne formatiert werden, wie zB echo '<h3 class=mt-4">Text</h3>';
+
+htmlspecialchars($variable) --> macht ausgabe sicher, verhindert, dass eingegebener html/js code direkt ausgeführt wird
+
+try {} --> code ausführen, bei dem ein fehler auftreten könnte
+
+catch (PDOException $e) {} --> fängt DB-fehler ab, zeigt den fehler an ohne abstürzen
+
+$conn->lastInsertId() --> holt zuletzt automatisch erstellte ID, nur bei AUTO_INCREMENT
+
+
+
+
