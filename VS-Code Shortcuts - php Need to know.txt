@@ -12,11 +12,19 @@ VS-Code Shortcuts:
 ------------------------------------------------------------------------------
 PHP need to know:
 ° create project in xampp-htdocs folder!
-° start server to run:
-	° cd into project (PS C:\xampp\htdocs\php example patientenverwaltung>) 
-	° php -S localhost:8000
+
+	° start apache & MySQL in xampp
+	° open http://localhost:8080/fahrplan_app/ --> in this example 8080 bc port was changed in config file due to local conflicts but shouldn't happen at exam
+	° http://localhost:8000/ur_app_folder_name/ --> regular way of starting
+	° mind that main file should be named index.php for this to work, if otherwise have to call sthg like http://localhost:8080/fahrplan_app/startseite.php	
+        or:
+	° start server to run:
+		° cd into project (PS C:\xampp\htdocs\php example patientenverwaltung>) 
+		° php -S localhost:8000
 ° then simply open:
 	° http://localhost:8000/index.php
+
+so again: main way: start apache & mysql in xampp and open http://localhost:8000/ur_app_folder_name/
 
 ------------------------------------------------------------------------------
 basic commands good no know: (extended in W3Schools)
