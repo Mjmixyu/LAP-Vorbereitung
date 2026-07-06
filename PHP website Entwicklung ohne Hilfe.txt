@@ -1,0 +1,60 @@
+PHP website Entwicklung ohne Hilfe - nur offizielle websites und Infos 
+-----------------------------------------------------------------------
+
+Gedankengang:
+	° DB Teil erledigt für dieses Beispiel (Fahrplan app mit Sitzplatzreservierung)
+	° Welche Files werden benötigt?
+	° Welche Funktionen sind gefragt?
+	° Welche Funktionen zusätzlich in dem Beispiel testen?
+	° Wie Testkonzept aufbauen?
+	° Was/welche Funktionen testen?
+
+Welche Files werden benötigt?
+	index.php --> Hauptteil der Website (Startseite, wird standardmäßig aufgerufen)
+	header.php --> Metadaten der Seite (Titel, Bootstrap Links, JavaScript Links, html doctype, lang)
+	footer.php --> Impressum am Ende der 
+	nav.php --> Navbar um zwischen allen Seiten zu switchen
+	database.php --> Datenbankverbindung
+
+Welche Funktionen sind gefragt?
+	° einfache Webseite (Startseite)
+	° Navigation
+	° Seite für das Einfügen von Datensätzen
+	° Seite für das Abfragen der DB
+	° prepared Statements
+	° wichtige Kommentare
+	° Oberfläche für Suchergebnisse und Inserts (Tables)
+
+Welche Funktionen zusätzlich in dem Beispiel testen?
+	° Fehlermeldungen/Toast/etc
+	° neues Fenster für Dateneingabe
+	° Page refresh wenn Daten gesucht und ein Table gefiltert herauskommen und angezeigt werden soll
+	° filtern: ASC/DESC, nach Text
+
+Wie Testkonzept aufbauen?
+	° prinzipiell simpel
+	° WAS wurde getestet? (welche Funktion)
+	° WIE wurde das getestet? (z.B. ungültige Feldeingabe mit manuellen tests)
+	° ERGEBNIS, Test erfolgreich oder nicht?
+	° Wenn nicht - bei Zeit beheben und dokumentieren
+	° wenn möglich maybe screenshots der Ergebnisse
+	° Wieso diese Funktion testen? (z.B. bei cross site scripting)
+
+Was/welche Funktionen testen?
+	° cross site scripting (XSS)
+	° SQL Injection
+	° ungültige Feldeingaben
+		° leeres Feld absenden
+		° ungültige Datentypen nicht akzeptieren
+		° Sonderzeichen testen
+		° lange Eingaben verhindern
+	° navigation
+		° manuelle Eingabe in der Domain, invalid führt immer zurück zu index.php
+		° alle links führen zur korrekten Seite
+	° beim Einfügen von Daten in die DB - mit MySQL prüfen SELECT * und Ergebnis checken ob neue Daten dabei sind
+	° beim Select schauen ob richtige Daten angezeigt werden
+	° Suche
+		° existierende Werte korrekt ausgeben
+		° nicht existierende Werte nicht durchführen und oder Fehlermeldung
+		° Groß-Kleinschreibung
+	° Responsiveness der Webseite
