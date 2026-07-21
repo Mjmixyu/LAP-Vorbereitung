@@ -1,0 +1,106 @@
+Prüfungsnahes Übungsbeispiel: E-Auto-Ladestationen
+
+Dieses Beispiel ist genau auf den beschriebenen Ablauf zugeschnitten:
+
+Vormittag: Datenbank selbst entwerfen, erstellen, testen und dokumentieren
+Nachmittag: bestehende Datenbank mit PHP-Oberfläche verwenden
+XAMPP, Apache, MariaDB/MySQL und PHP
+Filter, Berechnung, Fehlermeldungen und Prepared Statements
+
+Bearbeite zuerst nur die Aufgabenstellung. Danach kannst du mit der Kontrolllösung vergleichen.
+
+Teil 1 – Vormittag von 8:00 bis 12:00 Uhr
+Aufgabenstellung
+
+Ein Unternehmen betreibt mehrere Ladestationen für Elektroautos. Kunden können an den Ladestationen Ladevorgänge durchführen. Abhängig vom ausgewählten Tarif werden unterschiedliche Preise verrechnet.
+
+Erstellen Sie eine Datenbank für die Verwaltung der Kunden, Ladestationen, Tarife und Ladevorgänge.
+
+Fachliche Anforderungen
+Ein Kunde kann mehrere Ladevorgänge durchführen.
+Jeder Ladevorgang gehört genau zu einem Kunden.
+Eine Ladestation kann für mehrere Ladevorgänge verwendet werden.
+Jeder Ladevorgang findet genau an einer Ladestation statt.
+Ein Tarif kann bei mehreren Ladevorgängen verwendet werden.
+Für jeden Ladevorgang wird genau ein Tarif ausgewählt.
+Die E-Mail-Adresse eines Kunden muss eindeutig sein.
+Die Stationsnummer einer Ladestation muss eindeutig sein.
+Ein Ladevorgang besitzt eine Startzeit.
+Die Endzeit kann beim Start eines Ladevorgangs noch leer sein.
+Die geladene Energiemenge wird in Kilowattstunden gespeichert.
+Beim Start wird die geladene Energiemenge mit 0 vorinitialisiert.
+Der Umsatz eines Ladevorgangs wird nicht gespeichert, sondern aus Tarif und Energiemenge berechnet.
+Das Datenmodell muss sich in der dritten Normalform befinden.
+Auf der Stationsnummer muss ein eindeutiger Index erstellt werden.
+Mögliche Attribute
+
+Die Attribute müssen selbst den passenden Tabellen zugeordnet werden:
+
+Kundennummer
+Vorname
+Nachname
+E-Mail-Adresse
+Telefonnummer
+Registrierungsdatum
+
+Stationsnummer
+Bezeichnung
+Straße
+Hausnummer
+Postleitzahl
+Ort
+maximale Ladeleistung
+Status
+
+Tarifname
+Preis pro Kilowattstunde
+Startgebühr
+aktiv
+
+Startzeit
+Endzeit
+geladene Kilowattstunden
+Zu erledigende Arbeiten
+1. Datenmodell
+
+Erstellen Sie ein ER-Diagramm mit:
+
+Entitäten
+Attributen
+Primärschlüsseln
+Fremdschlüsseln
+Datentypen
+Pflichtfeldern und optionalen Feldern
+Kardinalitäten
+Begründung der dritten Normalform
+2. SQL-Erstellungsskript
+
+Das Skript muss enthalten:
+
+CREATE DATABASE
+USE
+CREATE TABLE
+PRIMARY KEY
+FOREIGN KEY
+UNIQUE
+CREATE INDEX
+3. Musterdaten
+
+Fügen Sie mindestens folgende Testdaten ein:
+
+drei Kunden
+drei Ladestationen
+drei Tarife
+mindestens sechs Ladevorgänge
+4. SQL-Abfragen
+
+Erstellen Sie folgende Abfragen:
+
+Alle Ladevorgänge mit Kunde, Ladestation und Tarif anzeigen.
+Den Preis jedes abgeschlossenen Ladevorgangs berechnen.
+Die Anzahl der Ladevorgänge pro Ladestation ermitteln.
+Den gesamten Umsatz pro Ladestation berechnen.
+Alle momentan laufenden Ladevorgänge anzeigen.
+Den Gesamtumsatz pro Kunde berechnen.
+Ladestationen auch dann anzeigen, wenn noch kein Ladevorgang vorhanden ist.
+Den Kunden mit dem höchsten Gesamtumsatz anzeigen.

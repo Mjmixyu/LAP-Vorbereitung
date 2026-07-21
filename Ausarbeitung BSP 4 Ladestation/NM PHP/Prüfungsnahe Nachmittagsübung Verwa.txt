@@ -1,0 +1,167 @@
+Prüfungsnahe Nachmittagsübung: Verwaltung von Ladevorgängen
+
+Für diese Übung gilt deine vormittags erstellte Datenbank als vorgegebene, bereits fertige Datenbank inklusive Testeinträgen.
+
+Verwendete Tabellen:
+
+Kunde
+Ladestation
+Tarif
+Ladevorgang
+
+Teil A – Aufgabenstellung
+Ausgangssituation
+
+Die Datenbank für die Verwaltung von E-Auto-Ladestationen wurde bereits erstellt und enthält Testdaten.
+
+Mit PHP und HTML soll eine einfache Bedienoberfläche entwickelt werden, über die Ladevorgänge:
+
+angezeigt,
+gefiltert,
+berechnet,
+und neu gestartet werden können.
+
+Als Entwicklungsumgebung werden verwendet:
+
+XAMPP
+Apache
+MariaDB/MySQL
+PHP
+HTML
+Webbrowser
+
+Aufgabe 1: Software einrichten
+XAMPP starten.
+Apache und MySQL starten.
+Im Ordner htdocs einen Projektordner erstellen:
+C:\xampp\htdocs\ladeverwaltung
+Die Dateien dort speichern.
+Die Webseite im Browser öffnen:
+http://localhost/ladeverwaltung/index.php
+Aufgabe 2: Datenbankverbindung
+
+Erstellen Sie eine PHP-Datei, die eine Verbindung zur vorgegebenen Datenbank herstellt.
+
+Anforderungen:
+
+Verbindung mit PDO
+Zeichensatz utf8mb4
+Datenbankfehler behandeln
+keine vollständigen technischen Fehlermeldungen für Benutzer anzeigen
+Aufgabe 3: Ladevorgänge anzeigen
+
+Zeigen Sie alle Ladevorgänge in einer HTML-Tabelle an.
+
+Folgende Informationen müssen dargestellt werden:
+
+Ladevorgangs-ID
+Kunde
+Ladestation
+Startzeit
+Endzeit
+geladene Kilowattstunden
+Tarif
+Status
+berechneter Preis
+
+Der Status soll berechnet werden:
+
+Endzeit ist NULL       → läuft
+Endzeit ist vorhanden  → abgeschlossen
+
+Der Preis darf nicht in der Datenbank gespeichert sein.
+
+Berechnung:
+
+Kilowattstunden × PreisProStunde + Startgebühr
+
+Für laufende Ladevorgänge soll noch kein endgültiger Preis angezeigt werden.
+
+Aufgabe 4: Filterfunktion
+
+Erstellen Sie Filter für:
+
+Kunde
+Ladestation
+Status:
+alle
+laufend
+abgeschlossen
+
+Die Inhalte der Dropdownfelder müssen aus der Datenbank geladen werden.
+
+Die Werte dürfen nicht fest im HTML eingetragen werden.
+
+Mehrere Filter müssen gleichzeitig funktionieren.
+
+Beispiele:
+
+Kunde 1 und Station 2
+nur laufende Vorgänge
+Kunde 2 und nur abgeschlossene Vorgänge
+
+Prepared Statements müssen verwendet werden.
+
+Aufgabe 5: Neuen Ladevorgang starten
+
+Erstellen Sie ein Formular zum Starten eines neuen Ladevorgangs.
+
+Der Benutzer muss auswählen:
+
+bestehenden Kunden
+Ladestation
+aktiven Tarif
+
+Automatisch gespeichert werden:
+
+Startzeit = aktueller Zeitpunkt
+Endzeit = NULL
+Kilowattstunden = 0
+
+Folgende Fehler müssen abgefangen werden:
+
+kein Kunde gewählt
+keine Ladestation gewählt
+kein Tarif gewählt
+ungültige Kunden-ID
+ungültige Stations-ID
+ungültiger oder inaktiver Tarif
+Ladestation hat bereits einen laufenden Ladevorgang
+Datenbankfehler
+
+Nach erfolgreichem Einfügen soll eine Erfolgsmeldung erscheinen.
+
+Aufgabe 6: Testfälle
+
+Definieren und dokumentieren Sie mindestens folgende Tests:
+
+Kein Filter gesetzt
+Nur Kundenfilter
+Nur Stationsfilter
+Mehrere Filter gleichzeitig
+Laufende Ladevorgänge
+Abgeschlossene Ladevorgänge
+Preisberechnung
+Gültiger neuer Ladevorgang
+Formular ohne Kunde
+Bereits belegte Ladestation
+Manipulierte ID
+SQL-Injection-Versuch
+Aufgabe 7: Dokumentation
+
+Die technische Dokumentation soll enthalten:
+
+Name in der Kopf- oder Fußzeile jeder Seite
+kurze Aufgabenbeschreibung
+verwendete Programme
+Screenshot des Datenmodells
+Screenshot der Oberfläche
+Datenbankverbindung
+SQL-Abfrage zur Auflistung
+PHP-Code für Filter
+PHP-Code für das Einfügen
+Erklärung der Berechnung
+Fehlermeldungen
+Testfälle
+Screenshots der Testergebnisse
+bekannte Fehler oder nicht fertiggestellte Funktionen
